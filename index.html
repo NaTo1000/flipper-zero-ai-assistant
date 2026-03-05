@@ -1,0 +1,539 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Flipper Zero — AI Assistant Installer &amp; Tutorial</title>
+  <meta name="description" content="Install and configure the Flipper Zero AI Assistant with this step-by-step guide. Features 3D device preview, WiFi setup, and full tutorial." />
+
+  <!-- Fonts (preconnect for speed) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+
+  <!-- Styles -->
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+<!-- ── Navigation ──────────────────────────────────────────────────── -->
+<nav id="top-nav">
+  <div class="nav-logo">FLIPPER <span>ZERO</span></div>
+  <ul class="nav-links">
+    <li><a href="#features">Features</a></li>
+    <li><a href="#installer">Install</a></li>
+    <li><a href="#tutorials">Tutorials</a></li>
+    <li><a href="#specs">Specs</a></li>
+    <li><a href="#faq">FAQ</a></li>
+  </ul>
+  <a href="#installer" class="btn btn-primary" style="padding:0.5rem 1.2rem;font-size:0.72rem;">
+    &#9654;&nbsp;Start Install
+  </a>
+</nav>
+
+<!-- ── Hero — 3-D Canvas ───────────────────────────────────────────── -->
+<div id="hero">
+  <canvas id="canvas3d"></canvas>
+  <canvas id="particles"></canvas>
+
+  <div class="hero-content">
+    <p class="hero-subtitle">AI-Powered &bull; WiFi Ready &bull; Open Source</p>
+    <h1 class="hero-title">
+      FLIPPER <span>ZERO</span><br />AI ASSISTANT
+    </h1>
+    <p class="hero-subtitle" style="margin-top:0.3rem;">
+      Installer &amp; Full Tutorial &mdash; v2.0
+    </p>
+    <div class="hero-buttons">
+      <a href="#installer" class="btn btn-primary">&#9654;&nbsp;Start Installation</a>
+      <a href="#tutorials" class="btn btn-outline">&#9776;&nbsp;View Tutorials</a>
+    </div>
+  </div>
+
+  <div class="scroll-hint">
+    SCROLL
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke-width="2.5"
+         stroke-linecap="round" stroke-linejoin="round">
+      <polyline points="6 9 12 15 18 9"></polyline>
+    </svg>
+  </div>
+</div>
+
+<!-- ── Features ────────────────────────────────────────────────────── -->
+<section id="features">
+  <p class="section-label">What You Get</p>
+  <h2 class="section-title">Superior Capabilities</h2>
+  <div class="divider"></div>
+  <p class="section-desc">
+    The Flipper Zero AI Assistant turns your device into an intelligent control deck —
+    combining RF hacking, NFC, IR blasting, and AI-driven automation in one orange package.
+  </p>
+
+  <div class="cards">
+    <div class="card">
+      <div class="card-icon">&#129302;</div>
+      <div class="card-title">AI Chat Interface</div>
+      <p class="card-text">
+        On-device natural language control. Ask the Flipper to scan, clone, replay,
+        or automate any signal directly via WiFi DevBoard.
+      </p>
+    </div>
+    <div class="card">
+      <div class="card-icon">&#128246;</div>
+      <div class="card-title">Sub-GHz Radio</div>
+      <p class="card-text">
+        Capture and replay 300–928 MHz signals. Garage doors, car fobs, barrier gates —
+        full frequency coverage with AI-assisted decode.
+      </p>
+    </div>
+    <div class="card">
+      <div class="card-icon">&#128241;</div>
+      <div class="card-title">NFC &amp; RFID</div>
+      <p class="card-text">
+        Read, write, and emulate ISO 14443A/B, ISO 15693, EM4100, HID, and more.
+        AI labelling of unknown card types.
+      </p>
+    </div>
+    <div class="card">
+      <div class="card-icon">&#128268;</div>
+      <div class="card-title">Infrared Blaster</div>
+      <p class="card-text">
+        Universal TV/AC/projector remote with AI-powered learning mode.
+        Supports RAW and protocol-decoded signals.
+      </p>
+    </div>
+    <div class="card">
+      <div class="card-icon">&#9654;&#65039;</div>
+      <div class="card-title">GPIO &amp; Scripting</div>
+      <p class="card-text">
+        16 GPIO pins. BadUSB keystroke injection. JS scripting engine
+        with AI code generation from natural language prompts.
+      </p>
+    </div>
+    <div class="card">
+      <div class="card-icon">&#128291;</div>
+      <div class="card-title">WiFi Dev Board</div>
+      <p class="card-text">
+        ESP32-S2 WiFi module streams data, hosts the web UI, and bridges
+        your Flipper to cloud AI services over the local network.
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- ── Installer ───────────────────────────────────────────────────── -->
+<div id="installer">
+  <div class="inner">
+    <p class="section-label">Step-By-Step</p>
+    <h2 class="section-title">Installation Wizard</h2>
+    <div class="divider"></div>
+    <p class="section-desc">
+      Follow these steps to flash the AI Assistant firmware and connect your
+      Flipper Zero to the WiFi Dev Board. Click a step to expand it.
+    </p>
+
+    <!-- Progress bar -->
+    <div class="progress-wrap">
+      <div class="progress-bar" style="width:0%"></div>
+    </div>
+
+    <!-- Stepper -->
+    <div class="stepper">
+
+      <!-- Step 1 -->
+      <div class="step active">
+        <div class="step-line">
+          <div class="step-dot">1</div>
+          <div class="step-connector"></div>
+        </div>
+        <div class="step-body">
+          <div class="step-title">Requirements &amp; Downloads</div>
+          <div class="step-detail">
+            <p>Before you start, make sure you have the following:</p>
+            <ul style="margin:0.7rem 0 0.7rem 1.2rem;color:var(--flipper-muted);">
+              <li>Flipper Zero device (any hardware revision)</li>
+              <li>WiFi Dev Board (ESP32-S2 module)</li>
+              <li>USB-C cable (data capable)</li>
+              <li>Computer running Windows 10+, macOS 12+, or Linux</li>
+              <li>qFlipper desktop app installed</li>
+            </ul>
+            <p>Download the latest AI Assistant firmware release:</p>
+            <div class="step-code">https://github.com/NaTo1000/flipper-zero-ai-assistant/releases/latest</div>
+            <p style="margin-top:0.7rem;">Also install qFlipper from the official site:</p>
+            <div class="step-code">https://flipperzero.one/update</div>
+            <div class="step-btn">
+              <button class="btn btn-primary" data-next-step="1">Next: Back Up Your Device &rarr;</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Step 2 -->
+      <div class="step">
+        <div class="step-line">
+          <div class="step-dot">2</div>
+          <div class="step-connector"></div>
+        </div>
+        <div class="step-body">
+          <div class="step-title">Back Up Your Flipper</div>
+          <div class="step-detail">
+            <p>Always back up before flashing. Connect your Flipper via USB-C, open qFlipper, and click <strong style="color:var(--flipper-orange)">Backup</strong>.</p>
+            <p style="margin-top:0.6rem;">Alternatively, back up from the Flipper menu:</p>
+            <div class="step-code">Main Menu → Storage → Backup → SD Card</div>
+            <p style="margin-top:0.7rem;">Your SD card data (signals, NFC cards, keys) will be preserved across firmware updates.</p>
+            <div class="step-btn">
+              <button class="btn btn-primary" data-next-step="2">Next: Flash the Firmware &rarr;</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Step 3 -->
+      <div class="step">
+        <div class="step-line">
+          <div class="step-dot">3</div>
+          <div class="step-connector"></div>
+        </div>
+        <div class="step-body">
+          <div class="step-title">Flash AI Assistant Firmware</div>
+          <div class="step-detail">
+            <p>Unzip the downloaded release. In qFlipper, choose <strong style="color:var(--flipper-orange)">Install from file</strong> and select the <code>.dfu</code> package:</p>
+            <div class="step-code">flipper-zero-ai-assistant-vX.X.X.tgz</div>
+            <p style="margin-top:0.7rem;">Or flash via CLI using the ufbt tool:</p>
+            <div class="step-code">pip install ufbt
+ufbt flash FIRMWARE=./flipper-zero-ai-assistant-vX.X.X.tgz</div>
+            <p style="margin-top:0.7rem;">Wait for the progress bar to complete. The device will reboot automatically.</p>
+            <div class="step-btn">
+              <button class="btn btn-primary" data-next-step="3">Next: Flash WiFi Dev Board &rarr;</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Step 4 -->
+      <div class="step">
+        <div class="step-line">
+          <div class="step-dot">4</div>
+          <div class="step-connector"></div>
+        </div>
+        <div class="step-body">
+          <div class="step-title">Flash the WiFi Dev Board</div>
+          <div class="step-detail">
+            <p>Attach the WiFi Dev Board to the GPIO header on the back of your Flipper. Hold the BOOT button on the Dev Board while connecting USB.</p>
+            <p style="margin-top:0.7rem;">Flash the ESP32-S2 firmware using <code>esptool</code>:</p>
+            <div class="step-code">pip install esptool
+esptool.py --chip esp32s2 --port /dev/ttyUSB0 write_flash \
+  0x0000 bootloader.bin \
+  0x8000 partitions.bin \
+  0x10000 ai-assistant-wifi.bin</div>
+            <p style="margin-top:0.7rem;">On Windows, replace <code>/dev/ttyUSB0</code> with the correct COM port (e.g., <code>COM5</code>).</p>
+            <div class="step-btn">
+              <button class="btn btn-primary" data-next-step="4">Next: Configure WiFi &rarr;</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Step 5 -->
+      <div class="step">
+        <div class="step-line">
+          <div class="step-dot">5</div>
+          <div class="step-connector"></div>
+        </div>
+        <div class="step-body">
+          <div class="step-title">Configure WiFi &amp; API Key</div>
+          <div class="step-detail">
+            <p>After flashing, the Dev Board broadcasts a setup hotspot. Connect your phone or computer to it:</p>
+            <div class="step-code">SSID:     FlipperAI-Setup
+Password: flipper0</div>
+            <p style="margin-top:0.4rem;color:var(--flipper-orange);font-size:0.82rem;">&#9888; This is a temporary setup password. Change it in the web UI after configuration.</p>
+            <p style="margin-top:0.7rem;">Open a browser and navigate to:</p>
+            <div class="step-code">http://192.168.4.1</div>
+            <p style="margin-top:0.7rem;">Enter your home WiFi credentials and your OpenAI API key (or compatible LLM endpoint). Save and reboot the Dev Board.</p>
+            <p style="margin-top:0.6rem;color:var(--flipper-orange);">&#9888; Security notes: (1) Change the setup hotspot password immediately after first use. (2) Use a restricted API key with a spending limit — never share it or commit it to source control.</p>
+            <div class="step-btn">
+              <button class="btn btn-primary" data-next-step="5">Next: Verify &amp; Done &rarr;</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Step 6 -->
+      <div class="step">
+        <div class="step-line">
+          <div class="step-dot">6</div>
+          <div class="step-connector"></div>
+        </div>
+        <div class="step-body">
+          <div class="step-title">Verify &amp; Start Using</div>
+          <div class="step-detail">
+            <p>Once connected to your home network, the orange LED on the Flipper pulses to confirm WiFi link. Open the AI Assistant app on your Flipper:</p>
+            <div class="step-code">Main Menu → Apps → GPIO → AI Assistant</div>
+            <p style="margin-top:0.7rem;">You can also access the web UI from any browser on your local network:</p>
+            <div class="step-code">http://flipperai.local</div>
+            <p style="margin-top:0.7rem;color:var(--flipper-green);">&#10003; Installation complete! Your Flipper Zero AI Assistant is ready.</p>
+            <div class="step-btn">
+              <a href="#tutorials" class="btn btn-primary">Explore Tutorials &rarr;</a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div><!-- /stepper -->
+  </div><!-- /inner -->
+</div><!-- /installer -->
+
+<!-- ── Tutorials ────────────────────────────────────────────────────── -->
+<section id="tutorials">
+  <p class="section-label">Learn</p>
+  <h2 class="section-title">Tutorial Library</h2>
+  <div class="divider"></div>
+  <p class="section-desc">
+    Master every feature of the Flipper Zero AI Assistant with these
+    step-by-step guides and video walkthroughs.
+  </p>
+
+  <div class="tutorial-grid">
+
+    <div class="tutorial-card">
+      <div class="tutorial-thumb">
+        <div class="thumb-bg"></div>
+        &#128246;
+        <span class="thumb-label">BEGINNER</span>
+      </div>
+      <div class="tutorial-info">
+        <h3>Sub-GHz Signal Capture &amp; Replay</h3>
+        <p>Learn to capture rolling-code and static garage door signals. Understand
+           the difference between RAW and decoded captures and when to use each.</p>
+      </div>
+    </div>
+
+    <div class="tutorial-card">
+      <div class="tutorial-thumb">
+        <div class="thumb-bg"></div>
+        &#128241;
+        <span class="thumb-label">BEGINNER</span>
+      </div>
+      <div class="tutorial-info">
+        <h3>NFC Card Cloning Guide</h3>
+        <p>Read, save, and emulate ISO 14443A cards including Mifare Classic.
+           Use AI-assisted analysis to identify card type and unlock sectors.</p>
+      </div>
+    </div>
+
+    <div class="tutorial-card">
+      <div class="tutorial-thumb">
+        <div class="thumb-bg"></div>
+        &#129302;
+        <span class="thumb-label">INTERMEDIATE</span>
+      </div>
+      <div class="tutorial-info">
+        <h3>AI Chat &amp; Voice Commands</h3>
+        <p>Set up your OpenAI key, configure the WiFi Dev Board, and issue natural
+           language commands directly from the Flipper screen or web interface.</p>
+      </div>
+    </div>
+
+    <div class="tutorial-card">
+      <div class="tutorial-thumb">
+        <div class="thumb-bg"></div>
+        &#128268;
+        <span class="thumb-label">INTERMEDIATE</span>
+      </div>
+      <div class="tutorial-info">
+        <h3>Universal IR Remote Setup</h3>
+        <p>Build a custom IR remote for any device. Covers learning mode, library
+           download, and the AI auto-labelling feature for unknown protocols.</p>
+      </div>
+    </div>
+
+    <div class="tutorial-card">
+      <div class="tutorial-thumb">
+        <div class="thumb-bg"></div>
+        &#9654;&#65039;
+        <span class="thumb-label">ADVANCED</span>
+      </div>
+      <div class="tutorial-info">
+        <h3>BadUSB &amp; AI Script Generation</h3>
+        <p>Create DuckyScript payloads using plain English descriptions. The AI
+           converts your intent into keystroke injection scripts automatically.</p>
+      </div>
+    </div>
+
+    <div class="tutorial-card">
+      <div class="tutorial-thumb">
+        <div class="thumb-bg"></div>
+        &#128291;
+        <span class="thumb-label">ADVANCED</span>
+      </div>
+      <div class="tutorial-info">
+        <h3>GPIO Automation &amp; Home Integration</h3>
+        <p>Wire sensors, relays, and I2C devices to the GPIO header. Use JS scripts
+           to automate routines and integrate with Home Assistant via WiFi.</p>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ── Specs ────────────────────────────────────────────────────────── -->
+<section id="specs" style="background:var(--flipper-panel);max-width:100%;padding:5rem 0;">
+  <div style="max-width:1100px;margin:0 auto;padding:0 1.5rem;">
+    <p class="section-label">Hardware</p>
+    <h2 class="section-title">Flipper Zero Specifications</h2>
+    <div class="divider"></div>
+
+    <table class="spec-table">
+      <thead>
+        <tr>
+          <th>Component</th>
+          <th>Specification</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td>CPU</td><td>STM32WB55 Dual Core (ARM Cortex-M4 @ 64 MHz + Cortex-M0+)</td></tr>
+        <tr><td>Display</td><td>1.4″ Monochrome LCD, 128×64 px, Orange backlight</td></tr>
+        <tr><td>Sub-GHz Radio</td><td>CC1101 — 300–928 MHz, TX/RX, AM/FM modulation</td></tr>
+        <tr><td>125 kHz RFID</td><td>EM4100, HID26, Indala, Hitag1/2, Pyramid</td></tr>
+        <tr><td>NFC</td><td>ST25R3916B — ISO 14443A/B, ISO 15693, FeliCa, NFC-F/V</td></tr>
+        <tr><td>Infrared</td><td>TX: 850 nm LED (up to 2 m). RX: TSOP75338 demodulator</td></tr>
+        <tr><td>Bluetooth</td><td>BLE 5.0 (STM32WB integrated)</td></tr>
+        <tr><td>GPIO</td><td>16 × 3.3 V GPIO, SPI, I2C, USART, USB-C, 1-Wire</td></tr>
+        <tr><td>WiFi (Dev Board)</td><td>ESP32-S2 — 802.11b/g/n 2.4 GHz, up to 150 Mbps</td></tr>
+        <tr><td>Storage</td><td>256 KB Flash + MicroSD (up to 256 GB)</td></tr>
+        <tr><td>Battery</td><td>2000 mAh LiPo, ~30 hours active use</td></tr>
+        <tr><td>Dimensions</td><td>100 × 40 × 25 mm · 102 g</td></tr>
+        <tr><td>Firmware</td><td>FreeRTOS, open source — github.com/flipperdevices/flipperzero-firmware</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- ── FAQ ──────────────────────────────────────────────────────────── -->
+<section id="faq">
+  <p class="section-label">Help</p>
+  <h2 class="section-title">Frequently Asked Questions</h2>
+  <div class="divider"></div>
+
+  <div class="faq-list">
+
+    <div class="faq-item">
+      <div class="faq-q">
+        Is this legal to use?
+        <svg class="chevron" width="18" height="18" viewBox="0 0 24 24" fill="none"
+             stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+          <polyline points="6 9 12 15 18 9"></polyline>
+        </svg>
+      </div>
+      <div class="faq-a">
+        The Flipper Zero is a legitimate security research tool sold commercially.
+        It is legal to own and use for authorised testing on systems you own or have
+        written permission to test. Misuse of radio signals (e.g., interfering with
+        licensed spectrum) may violate local laws. Always act responsibly.
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-q">
+        Do I need the WiFi Dev Board for the AI features?
+        <svg class="chevron" width="18" height="18" viewBox="0 0 24 24" fill="none"
+             stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+          <polyline points="6 9 12 15 18 9"></polyline>
+        </svg>
+      </div>
+      <div class="faq-a">
+        Yes. The AI Assistant firmware requires the ESP32-S2 WiFi Dev Board to connect
+        to your local network and relay requests to the configured LLM API endpoint.
+        The base firmware still works without the Dev Board but AI features will be disabled.
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-q">
+        Which AI models are supported?
+        <svg class="chevron" width="18" height="18" viewBox="0 0 24 24" fill="none"
+             stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+          <polyline points="6 9 12 15 18 9"></polyline>
+        </svg>
+      </div>
+      <div class="faq-a">
+        The assistant supports any OpenAI-compatible API endpoint. This includes
+        OpenAI GPT-4o, GPT-3.5-turbo, Anthropic Claude (via proxy), Mistral, and
+        locally-hosted models served by Ollama or LM Studio.
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-q">
+        Will flashing this firmware void my warranty?
+        <svg class="chevron" width="18" height="18" viewBox="0 0 24 24" fill="none"
+             stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+          <polyline points="6 9 12 15 18 9"></polyline>
+        </svg>
+      </div>
+      <div class="faq-a">
+        Third-party firmware may affect your hardware warranty. You can always
+        restore the official Flipper Zero firmware via qFlipper, which will return
+        the device to its original state. Back up your SD card data before flashing.
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-q">
+        The orange LED is not pulsing after setup — what do I do?
+        <svg class="chevron" width="18" height="18" viewBox="0 0 24 24" fill="none"
+             stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+          <polyline points="6 9 12 15 18 9"></polyline>
+        </svg>
+      </div>
+      <div class="faq-a">
+        Check that the Dev Board is seated firmly on the GPIO pins. Verify your WiFi
+        credentials are correct by re-entering setup mode (hold the BOOT button on the
+        Dev Board for 3 seconds). Ensure your router uses 2.4 GHz (the ESP32-S2 does
+        not support 5 GHz). Check the serial monitor for error messages.
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-q">
+        Where can I get support or contribute?
+        <svg class="chevron" width="18" height="18" viewBox="0 0 24 24" fill="none"
+             stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+          <polyline points="6 9 12 15 18 9"></polyline>
+        </svg>
+      </div>
+      <div class="faq-a">
+        Open an issue or pull request on the GitHub repository. Community discussion
+        happens in the Issues tab. Contributions are welcome — see CONTRIBUTING.md
+        for coding standards and the PR process.
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ── Footer ───────────────────────────────────────────────────────── -->
+<footer>
+  <div class="footer-logo">FLIPPER <span>ZERO</span></div>
+  <p style="margin-bottom:0.4rem;">
+    AI Assistant Installer &amp; Tutorial &mdash;
+    <a href="https://github.com/NaTo1000/flipper-zero-ai-assistant" target="_blank" rel="noopener">
+      View on GitHub
+    </a>
+  </p>
+  <p>
+    Released under the
+    <a href="LICENSE" target="_blank" rel="noopener">MIT License</a>.
+    Not affiliated with Flipper Devices Inc.
+  </p>
+</footer>
+
+<!-- ── Scripts ──────────────────────────────────────────────────────── -->
+<!-- Three.js (vendored locally so the page works fully offline) -->
+<script src="vendor/three.min.js"></script>
+<!-- 3D scene -->
+<script src="scene3d.js"></script>
+<!-- Installer &amp; UI logic -->
+<script src="installer.js"></script>
+
+</body>
+</html>
